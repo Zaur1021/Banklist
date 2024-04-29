@@ -35,6 +35,8 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -61,6 +63,59 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+//Project lesson #1
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+     <div class="movements__value">${mov}</div>
+   </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
+// Project lesson #2
+
+const eurToUSD = 1.1;
+
+const movementsUSD = movements.map(mov => mov * eurToUSD);
+
+const movementsDescriptions = movements.map((mov, i, arr) => {
+  `Movements ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+    mov
+  )}`;
+});
+// const movementsUSDfor = [];
+// for (const mov of movements) {
+//   movementsUSDfor.push(mov * eurToUSD);
+// }
+// // Coding Challenge #1
+//Test Data №1 Julia : [3,5,2,12,7], Kate's [4,1,15,8,3]
+//Test Data №2 Julia : [9,16,6,8,3], Kate's [10,5,6,1,4]
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   const dogsJuliaCorrected = dogsJulia.slice(1, -1);
+//   const allData = dogsJuliaCorrected.concat(dogsKate);
+//   allData.forEach(function (age, i) {
+//     age >= 3
+//       ? console.log(`Dog number ${i + 1} is an adult, and is ${age} years old`)
+//       : console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+//   });
+// };
+// checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -129,18 +184,18 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // ....
 
 // LESSON $
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-currencies.forEach(function (val, key, map) {
-  console.log(`${key}: ${val}`);
-});
+// currencies.forEach(function (val, key, map) {
+//   console.log(`${key}: ${val}`);
+// });
 
-const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
-console.log(currenciesUnique);
-currenciesUnique.forEach(function (val, _, map) {
-  console.log(`${val}: ${val}`);
-});
+// const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+// console.log(currenciesUnique);
+// currenciesUnique.forEach(function (val, _, map) {
+//   console.log(`${val}: ${val}`);
+// });
