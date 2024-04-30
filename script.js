@@ -99,6 +99,21 @@ const movementsDescriptions = movements.map((mov, i, arr) => {
     mov
   )}`;
 });
+// Project Lesson #3
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
+// Project Lesson #4
+const deposits = movements.filter(mov => mov > 0);
+const withdrawals = movements.filter(mov => mov < 0);
 // const movementsUSDfor = [];
 // for (const mov of movements) {
 //   movementsUSDfor.push(mov * eurToUSD);
