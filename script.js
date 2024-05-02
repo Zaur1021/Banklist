@@ -114,6 +114,15 @@ createUsernames(accounts);
 // Project Lesson #4
 const deposits = movements.filter(mov => mov > 0);
 const withdrawals = movements.filter(mov => mov < 0);
+// Projects lesson #4
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+// Project lesson #5
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+//-------------------------------------------
 // const movementsUSDfor = [];
 // for (const mov of movements) {
 //   movementsUSDfor.push(mov * eurToUSD);
@@ -214,3 +223,28 @@ const withdrawals = movements.filter(mov => mov < 0);
 // currenciesUnique.forEach(function (val, _, map) {
 //   console.log(`${val}: ${val}`);
 // });
+
+// Maximum value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+
+//Conding Challange #2
+const calcAvarageAge = function (dogsAges) {
+  const humanDogAges = dogsAges.map(dogAge => {
+    if (dogAge >= 2) return dogAge * 4 + 16;
+    else return dogAge * 2;
+  });
+  const adultDogs = humanDogAges.filter(dogAge => dogAge >= 18);
+  return adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
+};
+console.log(calcAvarageAge([16, 6, 10, 5, 6, 1, 4]));
+/*
+Test data 1
+[5,2,4,1,15,8,3]
+Test data 2
+[16,6,10,5,6,1,4]
+
+
+*/
