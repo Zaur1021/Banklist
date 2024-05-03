@@ -99,6 +99,29 @@ const movementsDescriptions = movements.map((mov, i, arr) => {
     mov
   )}`;
 });
+
+const calcDIsplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDIsplaySummary(account1.movements);
 // Project Lesson #3
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -225,21 +248,21 @@ calcDisplayBalance(account1.movements);
 // });
 
 // Maximum value
-const max = movements.reduce((acc, mov) => {
-  if (acc > mov) return acc;
-  else return mov;
-}, movements[0]);
+// const max = movements.reduce((acc, mov) => {
+//   if (acc > mov) return acc;
+//   else return mov;
+// }, movements[0]);
 
-//Conding Challange #2
-const calcAvarageAge = function (dogsAges) {
-  const humanDogAges = dogsAges.map(dogAge => {
-    if (dogAge >= 2) return dogAge * 4 + 16;
-    else return dogAge * 2;
-  });
-  const adultDogs = humanDogAges.filter(dogAge => dogAge >= 18);
-  return adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
-};
-console.log(calcAvarageAge([16, 6, 10, 5, 6, 1, 4]));
+// //Conding Challange #2
+// const calcAvarageAge = function (dogsAges) {
+//   const humanDogAges = dogsAges.map(dogAge => {
+//     if (dogAge >= 2) return dogAge * 4 + 16;
+//     else return dogAge * 2;
+//   });
+//   const adultDogs = humanDogAges.filter(dogAge => dogAge >= 18);
+//   return adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
+// };
+// console.log(calcAvarageAge([16, 6, 10, 5, 6, 1, 4]));
 /*
 Test data 1
 [5,2,4,1,15,8,3]
@@ -248,3 +271,33 @@ Test data 2
 
 
 */
+// const totalDepositsUSD = Math.trunc(
+//   movements
+//     .filter(mov => mov > 0)
+//     .map((mov, i, arr) => mov * eurToUSD)
+//     .reduce((acc, mov) => acc + mov, 0)
+// );
+// console.log(totalDepositsUSD);
+// //Conding Challange #3
+// const calcAvarageAge = dogsAges => {
+//   let reducedArrLength = 0;
+//   const humanDogAges =
+//     dogsAges
+//       .map(dogAge => (dogAge >= 2 ? dogAge * 4 + 16 : dogAge * 2))
+//       .filter(dogAge => dogAge >= 18)
+//       .reduce((acc, cur, i, arr) => {
+//         reducedArrLength = arr.length;
+//         return acc + cur;
+//       }, 0) / reducedArrLength;
+
+//   return humanDogAges;
+// };
+// console.log(calcAvarageAge([16, 6, 10, 5, 6, 1, 4]));
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+for (const account of accounts) {
+}
