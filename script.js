@@ -70,10 +70,10 @@ const currencies = new Map([
 ]);
 
 //Project lesson #1
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -225,6 +225,13 @@ btnClose.addEventListener('click', function (e) {
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 //-------------------------------------------
 // const movementsUSDfor = [];
@@ -387,14 +394,27 @@ Test data 2
 // const arr = [1, 2, 3, 4, 'hi'];
 // console.log(arr.every(n1 => n1 != 0));
 
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat());
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat(2));
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2));
 
-const allMovements = accounts
-  .map(acc => acc.movements)
-  .flat()
-  .reduce((acc, cur) => acc + cur, 0);
+// const allMovements = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, cur) => acc + cur, 0);
 
-const overalBalacnce = accounts.flatMap(acc => acc.movements);
+// const overalBalacnce = accounts.flatMap(acc => acc.movements);
+
+// let i = 5;
+// let j = 5;
+// let n = 10;
+
+// i = ++i + ++i;
+// n += j++ + ++j;
+// console.log(i, j, n);
+
+// const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+// console.log(owners.sort());
+
+// movements.sort((a, b) => a - b);
