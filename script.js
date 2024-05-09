@@ -418,3 +418,23 @@ Test data 2
 // console.log(owners.sort());
 
 // movements.sort((a, b) => a - b);
+
+const x = new Array(7);
+x.fill(1);
+x.fill(1, 3);
+
+Array.from({ length: 7 }, () => 1);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+
+console.log(
+  Array.from({ length: 100 }, () => Math.trunc(Math.random() * 6 + 1))
+);
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value')
+  );
+
+  console.log(movementsUI);
+});
