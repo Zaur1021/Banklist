@@ -419,22 +419,60 @@ Test data 2
 
 // movements.sort((a, b) => a - b);
 
-const x = new Array(7);
-x.fill(1);
-x.fill(1, 3);
+// const x = new Array(7);
+// x.fill(1);
+// x.fill(1, 3);
 
-Array.from({ length: 7 }, () => 1);
+// Array.from({ length: 7 }, () => 1);
 
-const z = Array.from({ length: 7 }, (_, i) => i + 1);
+// const z = Array.from({ length: 7 }, (_, i) => i + 1);
 
-console.log(
-  Array.from({ length: 100 }, () => Math.trunc(Math.random() * 6 + 1))
-);
+// console.log(
+//   Array.from({ length: 100 }, () => Math.trunc(Math.random() * 6 + 1))
+// );
 
-labelBalance.addEventListener('click', function () {
-  const movementsUI = Array.from(
-    document.querySelectorAll('.movements__value')
+// labelBalance.addEventListener('click', function () {
+//   const movementsUI = Array.from(
+//     document.querySelectorAll('.movements__value')
+//   );
+
+//   console.log(movementsUI);
+// });
+const bankDepositSum = accounts
+  .fkatMap((acc = acc.movements))
+  .filter(mov => mov > 0)
+  .reduce((acc, cur) => acc + cur, 0);
+
+console.log(bankDepositSum);
+
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+const sums = accounts
+  .flatMap(mov => mov.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
   );
 
-  console.log(movementsUI);
-});
+const convertTitleCase = function (title) {
+  const capitalize = word => word[0].toUpperCase() + word.slice(1);
+
+  const execptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (execptions.includes(word) ? word : capitalize(word)));
+  return capitalize(word);
+};
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title, a tragedy an apple'));
